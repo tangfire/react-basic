@@ -1,27 +1,21 @@
 // 项目的根组件
 // App -> index.js -> public/index.html(root)
 
-// const handleClick = () => {
-//   console.log('button clicked');
+// function Button(){
+//     return <button>click me</button>
 // }
 
-// const handleClick = (e) => {
-//   console.log('button clicked: ',e);
-// }
-
-// const handleClick = (name) => {
-//     console.log('button clicked: ',name);
-// }
-
-const handleClick = (name,e) => {
-    console.log('button clicked: ',name,e);
+const Button = () =>{
+    return <button>click me!</button>
 }
 
 function App() {
   return (
 
     <div className="App">
-     <button onClick={(e) => handleClick('jack',e)}>click me</button>
+     <Button></Button>
+        <br/>
+        <Button/>
     </div>
 
 
