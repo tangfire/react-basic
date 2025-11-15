@@ -1,33 +1,43 @@
 // 项目的根组件
 // App -> index.js -> public/index.html(root)
 
-// 子传父
-// 核心: 在子组件中调用父组件中的函数并传递实参
-import {useState} from 'react'
+import {useState} from "react";
 
-function Son({onGetSonMsg}) {
-    const sonMsg = 'this is son msg'
-    return (
-        <div>
-            this is Son
-            <button onClick={()=>onGetSonMsg(sonMsg)}>sendMsg</button>
-        </div>
-    )
+function A ({onGetAName}){
+  const name = 'this is A name';
+  return (
+      <div>
+        this is A component
+        <button onClick={()=>{
+            onGetAName(name);
+        }}>send</button>
+      </div>
+  )
+}
+
+function B ({name}){
+  return (
+      <div>
+        this is B Component
+          <br/>
+          {name}
+      </div>
+  )
 }
 
 
 function App() {
-    const [msg, setMsg] = useState('')
-    const getMsg = (msg) =>{
-        console.log(msg)
-        setMsg(msg)
-    }
+    const [name, setName] = useState()
 
+    const getAName = (name) => {
+        console.log(name);
+        setName(name)
+    }
   return (
 
     <div className="App">
-        this is App, {msg}
-      <Son onGetSonMsg={getMsg} />
+      <A onGetAName={getAName}></A>
+      <B name={name}></B>
     </div>
 
 
