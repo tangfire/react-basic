@@ -1,46 +1,35 @@
 // 项目的根组件
 // App -> index.js -> public/index.html(root)
 
-import {createContext, useContext, useState} from "react";
 
-// 1. createContext方法创建一个上下文对象
-const MsgContext = createContext()
+import {useEffect,useState} from "react";
 
-// 2. 在顶层组件 通过Provider组件提供数据
-
-// 3. 在底层组件 通过useContext钩子函数使用数据
-
-function A (){
-  return (
-      <div>
-        this is A component
-      <B></B>
-      </div>
-  )
-}
-
-function B(){
-    const msg = useContext(MsgContext);
-  return (
-      <div>this is B component,{msg}</div>
-
-  )
-}
-
-
+const URL = 'http://geek.itheima.net/v1_0/channels';
 
 function App() {
-    const msg = 'this is app msg'
+    // 创建一个状态数据
+    const [list, setList] = useState([]);
+   useEffect(() => {
+       // 额外的操作 获取频道列表
+        async function getList(){
+            const res =  await fetch(URL)
+            const jsonRes = await res.json()
+            console.log(jsonRes)
+            setList(jsonRes.data.channels)
+        }
+        getList();
+   },[])
   return (
-
-      <MsgContext.Provider value={msg}>
           <div className="App">
               this is App
-              <A></A>
+              <ul>
+                  {list.map((item)=>{
+                      return (
+                          <li key={item.id}>{item.name}</li>
+                      )
+                  })}
+              </ul>
           </div>
-      </MsgContext.Provider>
-
-
   );
 }
 
