@@ -1,15 +1,17 @@
 // 项目的根组件
 // App -> index.js -> public/index.html(root)
-import './index.css'
-const style = {color:'red',fontSize: '50px'}
+
+import {useState} from 'react'
 
 function App() {
-
+  const [value, setValue] = useState('');
   return (
 
     <div className="App">
-    <span style={style}>this is span</span>
-      <span className="foo">this is class foo</span>
+      <input value={value} onChange={(e)=>{
+          setValue(e.target.value)
+          console.log(value)
+      }} type="text"/>
     </div>
 
 
