@@ -1,44 +1,44 @@
 // 项目的根组件
 // App -> index.js -> public/index.html(root)
 
-import {useState} from "react";
+import {createContext, useContext, useState} from "react";
 
-function A ({onGetAName}){
-  const name = 'this is A name';
+// 1. createContext方法创建一个上下文对象
+const MsgContext = createContext()
+
+// 2. 在顶层组件 通过Provider组件提供数据
+
+// 3. 在底层组件 通过useContext钩子函数使用数据
+
+function A (){
   return (
       <div>
         this is A component
-        <button onClick={()=>{
-            onGetAName(name);
-        }}>send</button>
+      <B></B>
       </div>
   )
 }
 
-function B ({name}){
+function B(){
+    const msg = useContext(MsgContext);
   return (
-      <div>
-        this is B Component
-          <br/>
-          {name}
-      </div>
+      <div>this is B component,{msg}</div>
+
   )
 }
+
 
 
 function App() {
-    const [name, setName] = useState()
-
-    const getAName = (name) => {
-        console.log(name);
-        setName(name)
-    }
+    const msg = 'this is app msg'
   return (
 
-    <div className="App">
-      <A onGetAName={getAName}></A>
-      <B name={name}></B>
-    </div>
+      <MsgContext.Provider value={msg}>
+          <div className="App">
+              this is App
+              <A></A>
+          </div>
+      </MsgContext.Provider>
 
 
   );
