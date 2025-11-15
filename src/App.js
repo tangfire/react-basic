@@ -1,28 +1,33 @@
 // 项目的根组件
 // App -> index.js -> public/index.html(root)
 
-// 父传子
-// 1. 父组件传递数据 子组件标签身上绑定属性
-// 2. 子组件接收数据 props的参数
+// 子传父
+// 核心: 在子组件中调用父组件中的函数并传递实参
+import {useState} from 'react'
 
-
-function Son(props){
-    console.log(props)
-    // props: 对象里面包含了父组件传递过来的所有数据
-  return <div>this is son {props.children}</div>
+function Son({onGetSonMsg}) {
+    const sonMsg = 'this is son msg'
+    return (
+        <div>
+            this is Son
+            <button onClick={()=>onGetSonMsg(sonMsg)}>sendMsg</button>
+        </div>
+    )
 }
 
 
 function App() {
-
-    const name = "this is app name"
+    const [msg, setMsg] = useState('')
+    const getMsg = (msg) =>{
+        console.log(msg)
+        setMsg(msg)
+    }
 
   return (
 
     <div className="App">
-      <Son>
-          <span>this is span</span>
-      </Son>
+        this is App, {msg}
+      <Son onGetSonMsg={getMsg} />
     </div>
 
 
