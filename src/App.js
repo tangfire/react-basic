@@ -1,23 +1,26 @@
 // 项目的根组件
 // App -> index.js -> public/index.html(root)
 
-import {useRef} from 'react'
+// 父传子
+// 1. 父组件传递数据 子组件标签身上绑定属性
+// 2. 子组件接收数据 props的参数
 
-// 1. useRef生成ref对象,绑定到dom标签身上
-// 2. dom可用时,ref.current获取don
-// 渲染完毕之后dom生成之后才可用
+
+function Son(props){
+    console.log(props)
+    // props: 对象里面包含了父组件传递过来的所有数据
+  return <div>this is son {props.name}</div>
+}
+
 
 function App() {
-  const inputRef = useRef(null)
-  const showDom = () =>{
-    console.log(inputRef.current)
-    console.dir(inputRef.current)
-  }
+
+    const name = "this is app name"
+
   return (
 
     <div className="App">
-      <input type="text" ref={inputRef} />
-        <button onClick={showDom}>获取dom</button>
+      <Son name={name}></Son>
     </div>
 
 
