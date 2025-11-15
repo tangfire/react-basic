@@ -9,7 +9,7 @@
 function Son(props){
     console.log(props)
     // props: 对象里面包含了父组件传递过来的所有数据
-  return <div>this is son {props.name}</div>
+  return <div>this is son {props.name}, jsx: {props.child}</div>
 }
 
 
@@ -20,7 +20,16 @@ function App() {
   return (
 
     <div className="App">
-      <Son name={name}></Son>
+      <Son
+          name={name}
+          age={18}
+          isTrue={true}
+          list={['vue','react']}
+          obj={{name:'jack'}}
+          cb={()=>{console.log(123)}}
+          child={<span>this is span</span>}
+
+      ></Son>
     </div>
 
 
