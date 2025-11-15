@@ -4,7 +4,7 @@
 
 
 import { useSelector,useDispatch } from 'react-redux'
-import { decrement, increment } from './store/modules/counterStore'
+import { decrement, increment,addToNum } from './store/modules/counterStore'
 
 
 function App() {
@@ -26,6 +26,8 @@ function App() {
               >
                   Decrement
               </button>
+              <button onClick={()=>dispatch(addToNum(10))}>add To 10</button>
+              <button onClick={()=>dispatch(addToNum(20))}>add To 20</button>
           </div>
       </div>
   );

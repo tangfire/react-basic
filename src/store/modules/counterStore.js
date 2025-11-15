@@ -15,10 +15,13 @@ export const counterStore = createSlice({
         },
         decrement: state => {
             state.count -= 1
+        },
+        addToNum : (state,action) => {
+            state.count = action.payload
         }
     }
 })
 // 每个 case reducer 函数会生成对应的 Action creators
-export const { increment, decrement } = counterStore.actions
+export const { increment, decrement,addToNum } = counterStore.actions
 
 export default counterStore.reducer
