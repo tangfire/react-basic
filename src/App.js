@@ -4,32 +4,32 @@
 
 import {useEffect,useState} from "react";
 
-function Son(){
+function useToggle(){
+    // 可复用的逻辑代码
+    const [value, setValue] = useState(true);
+    const toggle = () => {setValue(!value);}
 
-    useEffect(()=>{
-        var timer = setInterval(()=>{
-            console.log('定时器执行中');
-        },1000);
-        return ()=>{
-            // 清除副作用(组件卸载时)
-            clearInterval(timer);
-        }
-    },[])
-
-    return <div>this is son</div>
+    // 哪些状态和回调函数需要在其他组件中使用 return
+    return {
+        value,
+        toggle
+    }
 }
+
+// 封装自定义hook通用逻辑
+
+// 1. 声明一个以use打头的函数
+// 2. 在函数内封装可复用的逻辑(只要是可复用的逻辑)
+// 3. 把组件中用到的状态或者回调return出去(以对象或数组)
+
 
 
 function App() {
-
-    const [show,setShow]=useState(true);
-
+    const {value,toggle} =  useToggle()
   return (
           <div className="App">
-              {show && <Son></Son>}
-              <button onClick={()=>{
-                  setShow(false);
-              }}>卸载Son组件</button>
+              {value && <div>this is div</div>}
+              <button onClick={toggle}>toggle</button>
           </div>
   );
 }
