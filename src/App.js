@@ -2,35 +2,32 @@
 // App -> index.js -> public/index.html(root)
 
 
-import {useEffect,useState} from "react";
 
-function useToggle(){
-    // 可复用的逻辑代码
-    const [value, setValue] = useState(true);
-    const toggle = () => {setValue(!value);}
-
-    // 哪些状态和回调函数需要在其他组件中使用 return
-    return {
-        value,
-        toggle
-    }
-}
-
-// 封装自定义hook通用逻辑
-
-// 1. 声明一个以use打头的函数
-// 2. 在函数内封装可复用的逻辑(只要是可复用的逻辑)
-// 3. 把组件中用到的状态或者回调return出去(以对象或数组)
-// 4. 在哪个组件中要用到这个逻辑,就执行这个函数,解构出来状态和回调进行使用
+import { useSelector,useDispatch } from 'react-redux'
+import { decrement, increment } from './store/modules/counterStore'
 
 
 function App() {
-    const {value,toggle} =  useToggle()
+    const count = useSelector(state => state.counter.count)
+    const dispatch = useDispatch()
   return (
-          <div className="App">
-              {value && <div>this is div</div>}
-              <button onClick={toggle}>toggle</button>
+      <div className="App">
+          <div>
+              <button
+                  aria-label="Increment value"
+                  onClick={() => dispatch(increment())}
+              >
+                  Increment
+              </button>
+              <span>{count}</span>
+              <button
+                  aria-label="Decrement value"
+                  onClick={() => dispatch(decrement())}
+              >
+                  Decrement
+              </button>
           </div>
+      </div>
   );
 }
 
