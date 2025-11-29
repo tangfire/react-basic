@@ -1,31 +1,21 @@
 // 项目的根组件
 // App -> index.js -> public/index.html(root)
 
-import {useMemo, useState} from "react";
+import {memo, useState} from "react";
 
-function fib(n){
-    if (n < 3)
-        return 1;
-    return fib(n-2) + fib(n-1);
-
-}
+const MemoSon = memo(function Son(){
+    console.log("Hello World!");
+    return <div>this is son</div>
+})
 
 
 
 function App() {
-    const [count1,setCount1] = useState(0);
-
-
-    const [count2,setCount2] = useState(0);
-    const result = useMemo(() => {
-        // 返回计算得到的结果
-        return fib(count1)
-    }, [count1]);
+    const [count, setCount] = useState(0)
   return (
       <div className="App">
-        <button onClick={()=>setCount1(count1 + 1)}>change count1: {count1}</button>
-          <button onClick={()=>setCount2(count2 + 1)}>change count2: {count2}</button>
-          {result}
+        <button onClick={()=>setCount(count + 1)}>+{count}</button>
+          <MemoSon></MemoSon>
       </div>
   );
 }
